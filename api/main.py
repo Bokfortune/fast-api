@@ -24,16 +24,17 @@ class RegisterRequest(BaseModel):
     email: str
     passowrd: str
 
-from fastapi.templating import Jinja2Templates
+# from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import FastAPI, Request
 
-# 템플릿 디렉토리 설정
-# pip install jinja2
-templates = Jinja2Templates(directory="templates")
-@app.get("/", response_class=HTMLResponse)
-def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+# # 템플릿 디렉토리 설정
+# # pip install jinja2
+# fastapi 방식으로 화면을 렌더링 함
+# templates = Jinja2Templates(directory="templates")
+# @app.get("/", response_class=HTMLResponse)
+# def index(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request})
      
 
 # 라우터(요청에 응답하는)
@@ -142,5 +143,8 @@ def get_orders(user_id:int = Query(...),db:Session=Depends(get_db)):
     orders = db.query(Order).filter(Order.user_id == user_id).all()
     return orders
 
-# 정적 HTML 파일 서빙
-app.mount("/", StaticFiles(directory="templates", html=True), name="static")
+# # 정적 HTML 파일 서빙
+# FAST api 방식
+
+
+# app.mount("/", StaticFiles(directory="templates", html=True), name="static")
