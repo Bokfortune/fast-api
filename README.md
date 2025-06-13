@@ -14,3 +14,18 @@ uvicorn main:app --reload
 ```
 http://localhost:8000/docs
 http://127.0.0.1:8000/docs
+
+
+# Flasks 설정
+```
+pip install flask
+```
+
+# Flasks 실행
+```
+새 터미널 cd frontend
+python app.py
+```
+
+
+
