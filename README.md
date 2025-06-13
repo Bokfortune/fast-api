@@ -1,3 +1,10 @@
+# 새로운 폴더 생성
+# vscode에서 오픈
+# 터미널 접속
+# conda create -n 가상환경이름 python
+# ctrl + shift + p : 인터프리터를 가상환경 이름으로 선택
+
+
 "# fast-api" 
 # install 
 ```
