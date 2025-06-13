@@ -44,4 +44,4 @@ class OrderOut(BaseModel):
     product_id: int
     quantity: int
     class Config:   # 객체로 리턴할때
-        from_attributes = True
+        from_attributes = True    
