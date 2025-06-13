@@ -27,5 +27,8 @@ pip install flask
 python app.py
 ```
 
-
-
+```
+# 주요 에러
+```
+CROS
+pydentic으로 API 서버에서 데이터 정의를 했기 때문에 타입에 맞게 데이터를 넘겨줘야 함

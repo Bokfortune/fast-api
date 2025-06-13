@@ -6,8 +6,18 @@ from model import *
 from database import SessionLocal,engin
 from schemas import *
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 # Fast api 생성
 app = FastAPI()
+
+# CORS(Cross-Origin Resource Sharing) 설정
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins = ["http://127.0.0.1:5000",'http://localhost:5000'], # flask 주소 허용
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*']
+)
 
 # 앱을 실행하면 DB에 정의된 모든 테이블을 생성
 Base.metadata.create_all(bind=engin)
@@ -18,19 +28,15 @@ def get_db():
         yield db # 종속된 함수에 세션 주입
     finally:
         db.close()  # 요청이 끝나면 자동으로 세션 종료
-# 회원가입용 데이터타입  pydantic 
-class RegisterRequest(BaseModel):
-    username: str
-    email: str
-    passowrd: str
 
-# from fastapi.templating import Jinja2Templates
+
+from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import FastAPI, Request
 
-# # 템플릿 디렉토리 설정
-# # pip install jinja2
-# fastapi 방식으로 화면을 렌더링 함
+# 템플릿 디렉토리 설정
+# pip install jinja2
+# fastapi 방식으로 화면을 랜더랑 사용.
 # templates = Jinja2Templates(directory="templates")
 # @app.get("/", response_class=HTMLResponse)
 # def index(request: Request):
@@ -49,7 +55,7 @@ def register_user(user: RegisterRequest, db:Session=Depends(get_db)):
     new_user =  User(
         username = user.username,
         email = user.email,
-        password = user.passowrd
+        password = user.password
     )
     # db commit하는 과정과 동일
     db.add(new_user)
@@ -143,8 +149,6 @@ def get_orders(user_id:int = Query(...),db:Session=Depends(get_db)):
     orders = db.query(Order).filter(Order.user_id == user_id).all()
     return orders
 
-# # 정적 HTML 파일 서빙
+# 정적 HTML 파일 서빙
 # FAST api 방식
-
-
 # app.mount("/", StaticFiles(directory="templates", html=True), name="static")
