@@ -1,1 +1,16 @@
 "# fast-api" 
+# install 
+```
+pip install fastapi uvicorn sqlalchemy
+```
+
+# Fast API 실행 -main.py가 있는 api 폴더에서 진행
+```
+cd api
+uvicorn main:app --reload
+```
+
+# API 테스트
+```
+http://localhost:8000/docs
+http://127.0.0.1:8000/docs
